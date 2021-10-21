@@ -91,8 +91,8 @@ def menu_bot_parada(update, context):
 def menu_bot_reinicio(update, context):
     query = update.callback_query
     global proceso_seleccionado, proceso_seleccionado_completo
-    proceso_seleccionado_parada = './reboot.sh ' + proceso_seleccionado
-    texto_salida = subprocess.check_output([proceso_seleccionado_parada], universal_newlines=True, shell=True)
+    proceso_seleccionado_reinicio = './reboot.sh ' + proceso_seleccionado
+    texto_salida = subprocess.check_output([proceso_seleccionado_reinicio], universal_newlines=True, shell=True)
 
     context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_salida, reply_markup=main_menu_keyboard_all())
 
