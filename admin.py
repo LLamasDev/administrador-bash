@@ -19,7 +19,7 @@ def main_menu_keyboard(): # Menu inicial
     return InlineKeyboardMarkup(keyboard)
 
 def main_menu_keyboard_all(): # Menu del proceso
-    keyboard = [[InlineKeyboardButton('Menú principal', callback_data='menu_principal')], [InlineKeyboardButton('Estado', callback_data='menu_estado')], [InlineKeyboardButton('Arrancar', callback_data='menu_arrancar'), InlineKeyboardButton('Parar', callback_data='menu_parada')]]
+    keyboard = [[InlineKeyboardButton('Menú principal', callback_data='menu_principal')], [InlineKeyboardButton('Estado', callback_data='menu_estado')], [InlineKeyboardButton('Arrancar', callback_data='menu_arrancar'), InlineKeyboardButton('Parar', callback_data='menu_parada')], [InlineKeyboardButton('Reiniciar', callback_data='menu_reinicio')]]
 
     return InlineKeyboardMarkup(keyboard)
 
@@ -34,6 +34,7 @@ def main():
     ud.add_handler(CallbackQueryHandler(menu_bot_estado, pattern='menu_estado'))
     ud.add_handler(CallbackQueryHandler(menu_bot_arranque, pattern='menu_arrancar'))
     ud.add_handler(CallbackQueryHandler(menu_bot_parada, pattern='menu_parada'))
+    ud.add_handler(CallbackQueryHandler(menu_bot_reinicio, pattern='menu_reinicio'))
     updater.start_polling()
     updater.idle()
 
@@ -67,25 +68,33 @@ def menu_bot_estado(update, context):
     query = update.callback_query
     global proceso_seleccionado, proceso_seleccionado_completo
     proceso_seleccionado_estado = './procesos.sh ' + proceso_seleccionado
-    texto_cr = subprocess.check_output([proceso_seleccionado_estado], universal_newlines=True, shell=True) #texto_cr = subprocess.run(['ls', '-a'], capture_output=True, text=True)
+    texto_salida = subprocess.check_output([proceso_seleccionado_estado], universal_newlines=True, shell=True) #texto_salida = subprocess.run(['ls', '-a'], capture_output=True, text=True)
 
-    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_cr, reply_markup=main_menu_keyboard_all())
+    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_salida, reply_markup=main_menu_keyboard_all())
 
 def menu_bot_arranque(update, context):
     query = update.callback_query
     global proceso_seleccionado, proceso_seleccionado_completo
     proceso_seleccionado_arranque = './start.sh ' + proceso_seleccionado
-    texto_cr = subprocess.check_output([proceso_seleccionado_arranque], universal_newlines=True, shell=True)
+    texto_salida = subprocess.check_output([proceso_seleccionado_arranque], universal_newlines=True, shell=True)
 
-    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_cr, reply_markup=main_menu_keyboard_all())
+    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_salida, reply_markup=main_menu_keyboard_all())
 
 def menu_bot_parada(update, context):
     query = update.callback_query
     global proceso_seleccionado, proceso_seleccionado_completo
     proceso_seleccionado_parada = './stop.sh ' + proceso_seleccionado
-    texto_cr = subprocess.check_output([proceso_seleccionado_parada], universal_newlines=True, shell=True)
+    texto_salida = subprocess.check_output([proceso_seleccionado_parada], universal_newlines=True, shell=True)
 
-    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_cr, reply_markup=main_menu_keyboard_all())
+    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_salida, reply_markup=main_menu_keyboard_all())
+
+def menu_bot_reinicio(update, context):
+    query = update.callback_query
+    global proceso_seleccionado, proceso_seleccionado_completo
+    proceso_seleccionado_parada = './reboot.sh ' + proceso_seleccionado
+    texto_salida = subprocess.check_output([proceso_seleccionado_parada], universal_newlines=True, shell=True)
+
+    context.bot.edit_message_text(chat_id=query.message.chat_id, message_id=query.message.message_id, text=proceso_seleccionado_completo + ':\n' + texto_salida, reply_markup=main_menu_keyboard_all())
 
 if __name__ == '__main__':
     main()
