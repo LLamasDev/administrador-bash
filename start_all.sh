@@ -4,14 +4,15 @@ function funcion() {
   { # try
     ./procesos.sh 'supercell'
     ./start.sh 'supercell'
-
+    echo''
     ./procesos.sh 'clashroyale'
     ./start.sh 'clashroyale'
-
+    echo''
     ./procesos.sh 'clashofclans'
     ./start.sh 'clashofclans'
+    echo''
 
-    proceso=$(ps -ef | grep -i python | grep -iv "screen\|grep\|networkd" | wc -l)
+    proceso=$(ps -ef | grep -i "supercell\|clashroyale\|clashofclans" | grep -iv "screen\|grep\|networkd" | wc -l)
 
     if [ $proceso -eq 3 ]; then # Si el contador del proceso es 3 significa que estan corriendo los procesos
       echo 'Arrancado todos los procesos correctamente.'

@@ -14,15 +14,15 @@ function funcion() {
       confirmacion=$(ps -ef | grep -i $primer_ag.py | grep -iv "screen\|grep\|networkd" | wc -l) # Verifico que esté parado
 
       if [ $confirmacion -eq 0 ]; then # Si el contador del proceso es 0 significa que se paró correctamente
-        echo 'Proceso matado correctamente.'
+        echo "El proceso $primer_ag se ha parado correctamente."
       else # No se paro el proceso correctamente
-        echo 'No se pudo matar el proceso.'
+        echo "No se pudo parar el proceso $primer_ag."
       fi
     else # El proceso no es 1 significa que no esta corriendo, ya que solo puede estar arrancado una vez
-      echo 'El proceso no esta corriendo, saliendo de la parada.'
+      echo "El proceso $primer_ag no esta corriendo, saliendo de la parada."
     fi
   } || { # catch
-    echo 'Error al matar el proceso.'
+    echo "Error al parar el proceso $primer_ag."
   }
 }
 
