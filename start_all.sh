@@ -8,6 +8,7 @@ function funcion() {
     echo''
     ./start.sh 'clashofclans'
     echo''
+    sleep 10 # Paramos 10 segundos para esperar el arranque del proceso
 
     proceso=$(ps -ef | grep -i "supercell\|clashroyale\|clashofclans" | grep -iv "screen\|grep\|networkd" | wc -l)
 

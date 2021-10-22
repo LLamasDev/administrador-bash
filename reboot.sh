@@ -7,6 +7,7 @@ function funcion() {
     ./stop.sh "$primer_ag"
     ./start.sh "$primer_ag"
     echo ''
+    sleep 10 # Paramos 10 segundos para esperar el arranque del proceso
 
     proceso=$(ps -ef | grep -i $primer_ag.py | grep -iv "screen\|grep\|networkd" | wc -l)
 
