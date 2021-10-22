@@ -2,13 +2,10 @@
 
 function funcion() {
   { # try
-    ./procesos.sh 'supercell'
     ./stop.sh 'supercell'
     echo ''
-    ./procesos.sh 'clashroyale'
     ./stop.sh 'clashroyale'
     echo''
-    ./procesos.sh 'clashofclans'
     ./stop.sh 'clashofclans'
     echo''
 
