@@ -10,7 +10,7 @@ function funcion() {
     echo''
     sleep 10 # Paramos 10 segundos para esperar el arranque del proceso
 
-    proceso=$(ps -ef | grep -i "supercell\|clashroyale\|clashofclans" | grep -iv "screen\|grep\|networkd" | wc -l)
+    proceso=$(ps -ef | grep -i "supercell\|clashroyale\|clashofclans" | grep -iv "screen\|grep\|networkd" | wc -l) # Contador para saber si esta corriendo
 
     if [ $proceso -eq 3 ]; then # Si el contador del proceso es 3 significa que estan corriendo los procesos
       echo 'Reiniciado todos los procesos correctamente.'
