@@ -10,7 +10,7 @@ function funcion() {
       echo "El proceso $primer_ag ya estaba arrancado, saliendo del arranque."
     else # El proceso no es 1 significa que no esta corriendo, ya que solo puede estar arrancado una vez
       ruta=$(find /bot/ -type f -iname "$primer_ag*" 2>/dev/null) # Saco la ruta del archivo que siempre estan en bot
-      screen_proceso=$(screen -S $primer_ag -d -m bash -c "python3 $ruta") # Ejecuto el archivo Python en una screen
+      screen_proceso=$(screen -S $primer_ag -d -m bash -c "python $ruta") # Ejecuto el archivo Python en una screen
 
       echo "El proceso $primer_ag arrancado correctamente."
     fi

@@ -5,9 +5,10 @@ primer_ag=$1 # Primer argumento
 function funcion() {
   { # try
     ./stop.sh "$primer_ag"
+    sleep 3
     ./start.sh "$primer_ag"
     echo ''
-    sleep 10 # Paramos 10 segundos para esperar el arranque del proceso
+    sleep 5 # Paramos 5 segundos para esperar el arranque del proceso
 
     proceso=$(ps -ef | grep -i $primer_ag.py | grep -iv "screen\|grep\|networkd" | wc -l) # Contador para saber si esta corriendo
 
